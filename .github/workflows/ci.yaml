@@ -39,8 +39,6 @@ jobs:
         # manages all builds. So the time per rule must be limited.
         run: |
           VERSION=${{ steps.version.outputs.version }}
-          make build/output/libmpv-libs_${VERSION}_tvos-arm64-audio-default.tar.gz
-          make build/output/libmpv-libs_${VERSION}_tvos-arm64-video-default.tar.gz
           make build/output/libmpv-libs_${VERSION}_tvossimulator-arm64-audio-default.tar.gz
           make build/output/libmpv-libs_${VERSION}_tvossimulator-arm64-video-default.tar.gz
       - name: Upload artifacts
@@ -48,7 +46,6 @@ jobs:
         with:
           if-no-files-found: error
           path: |
-            build/output/debug.zip
             build/output/*.tar.gz
 
       - name: Release
@@ -57,5 +54,4 @@ jobs:
         with:
           fail_on_unmatched_files: true
           files: |
-            build/output/debug.zip
             build/output/*.tar.gz
